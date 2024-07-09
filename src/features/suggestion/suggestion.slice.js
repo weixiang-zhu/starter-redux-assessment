@@ -16,30 +16,29 @@ const initialState = {
   error: true,
 };
 
-const options = {
+const suggestionSlice = createSlice({
   name: 'suggestion',
   initialState,
   reducers: {},
-  extraReducers: {
-    /* Task 16: Inside `extraReducers`, add reducers to handle all three promise lifecycle states - pending, fulfilled, and rejected - for the `fetchSuggestion()` call */
-    [fetchSuggestion.pending]: (state) => {
-      state.loading = true;
-      state.error = false;
-    },
-    [fetchSuggestion.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.error = false;
-      state.suggestion = action.payload;
-    },
-    [fetchSuggestion.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = true;
-      state.suggestion = action.payload;
-    }
+  extraReducers: (builder) => {
+    builder
+        .addCase(fetchSuggestion.pending, (state) => {
+          state.loading = true;
+          state.error = false;
+        })
+        .addCase(fetchSuggestion.fulfilled, (state, action) => {
+          state.loading = false;
+          state.error = false;
+          state.suggestion = action.payload;
+        })
+        .addCase(fetchSuggestion.rejected, (state, action) => {
+          state.loading = false;
+          state.error = true;
+          state.suggestion = '';
+        });
   },
-};
+});
 
-const suggestionSlice = createSlice(options);
 
 export default suggestionSlice.reducer;
 

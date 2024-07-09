@@ -4,7 +4,7 @@ import './list.css';
 
 export default function PhotosList() {
   // Task 14: Call `useSelector()` below with `selectFilteredPhotos` instead of `selectAllPhotos`
-  const photos = useSelector(selectFilteredPhotos) || [];
+  const photos = useSelector(selectFilteredPhotos);
   // Task 8: Store a reference to the Redux store's dispatch method in a variable called `dispatch`
   const dispatch = useDispatch();
 
